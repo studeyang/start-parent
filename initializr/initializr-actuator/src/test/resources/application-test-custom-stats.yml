@@ -1,0 +1,7 @@
+initializr:
+  stats:
+    elastic:
+      uri: http://localhost/elastic
+      username: test-user
+      password: test-password
+      max-attempts: 1

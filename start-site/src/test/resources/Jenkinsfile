@@ -1,0 +1,66 @@
+library 'libs-share'
+library 'libs-deployer'
+
+pipeline {
+  agent {
+    node {
+      label 'master'
+    }
+  }
+
+  options {
+    timeout(time:config.params.buildTimeout, unit: config.params.buildTimeoutUnit)
+    buildDiscarder(logRotator(numToKeepStr: "${config.params.maxBuildsToKeep}"))
+  }
+
+  environment {
+    WECHAT_ROBOT_KEYS = 'f5662a75-b0a8-44f5-afa1-ae7dda80dec7,cf45ce4b-fae7-493b-a3d3-5a998f6a1a25' //xxxx-5a998f6a1a25 为CICD通知群-INFRA-CICD构建通知机器人
+  }
+
+  parameters {
+    choice(name: 'ENV_NAME', choices: getEnvNameList(), description: '请选择要部署的环境')
+    choice(name: 'SERVICE_NAME', choices: [
+      '',
+      'courier-agent',
+      'courier-producer',
+      'courier-consumer',
+      'courier-management',
+      'courier-delay',
+      'courier-transfer-mq',
+      'gateway-api',
+      'sailf-http-worker',
+      'panda-interfaces',
+      'infra-admin',
+      'infrakeeper-admin',
+      'icec-cloud-example-service',
+      'start-site',
+      'cass-cloud-degrade-service'
+
+    ], description: '选择要部署的服务')
+    string(name: 'DOCKER_IMAGE_VERSION', defaultValue: 'latest', description: '请输入服务使用的Docker镜像版本(注意：禁止在生产环境署latest版本的镜像!')
+    booleanParam(name: 'RESOURCE_UPDATE', defaultValue: false, description: '如果启用将覆盖更新Service及ConfigMap')
+    string(name: 'MOCK_API_AGENT', defaultValue: '', description: '输入测试用的 MOCK 网关地址')
+    string(name: 'FLYING_BEAR_CALLBACK_PARAMS', 'defaultValue':'', description: '飞熊平台回调参数（手动构建请忽略该参数配置）' )
+  }
+
+
+  stages {
+    stage('启动构建') {
+      steps {
+        startRunning('createKubeNamespace': false, "enableSonar": false)
+      }
+    }
+  }
+
+
+  post {
+    success {
+      runTasksForSuccess()
+    }
+
+    failure {
+      runTasksForFailure()
+    }
+  }
+
+}

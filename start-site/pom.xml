@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.spring.start</groupId>
+        <artifactId>start-parent</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>start-site</artifactId>
+    <name>Java Project Initializr Website</name>
+
+    <properties>
+        <docker.imageName>${project.artifactId}</docker.imageName>
+        <docker.imageVersion>${project.version}</docker.imageVersion>
+        <docker.plugin.version>1.0.0</docker.plugin.version>
+        <dockerfile.plugin.version>1.4.0</dockerfile.plugin.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.github.cdancy</groupId>
+            <artifactId>jenkins-rest</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.studeyang</groupId>
+            <artifactId>casslog-spring-boot-starter</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-generator-zebra</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-generator-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-version-resolver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.spring.start</groupId>
+            <artifactId>start-client</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-generator-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>start-site</finalName>
+        <plugins>
+            <plugin>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build-info</id>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                        <configuration>
+                            <additionalProperties>
+                                <versions.spring-boot>${project.parent.parent.version}</versions.spring-boot>
+                                <versions.initializr>${spring-initializr.version}</versions.initializr>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>repackage</id>
+                        <configuration>
+                            <classifier>exec</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

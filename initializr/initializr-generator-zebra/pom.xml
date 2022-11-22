@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>initializr-generator-zebra</artifactId>
+    <version>${revision}</version>
+    <name>Spring Initializr :: Zebra (Spring projects)</name>
+    <parent>
+        <groupId>io.spring.initializr</groupId>
+        <artifactId>initializr-parent</artifactId>
+        <version>${revision}</version>
+        <relativePath>../initializr-parent</relativePath>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test-autoconfigure</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-generator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-metadata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.spring.initializr</groupId>
+            <artifactId>initializr-generator-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/libs-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

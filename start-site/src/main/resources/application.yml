@@ -1,0 +1,518 @@
+logging:
+  level:
+    org.springframework.core.env: warn
+    org.springframework.jndi: warn
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,text/css,text/html
+    min-response-size: 2048
+  error:
+    include-message: always
+  forward-headers-strategy: native
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  task:
+    execution:
+      thread-name-prefix: initializr-
+  web:
+    resources:
+      cache:
+        use-last-modified: false
+
+security:
+  authorization-uri: https://gitlab.yourcompany.net/oauth/authorize
+  token-uri: https://gitlab.yourcompany.net/oauth/token
+  user-info-uri: https://gitlab.yourcompany.net/api/v4/user
+  redirect-uri: https://127.0.0.1:8081/oauth/redirect
+  client-id: b9c3585d916bdae87213b8a5e1f8d64ae399a89e837c646ddd46f139c42d7d22
+  client-secret: 8f17127413df232a1535b7f4fb86a868e7dc3ba67d89c366d274f9e9fa115cf0
+
+initializr:
+  groupId.value: com.yourcompany
+  artifact-id.value: example
+  version.value: 1.0.0-SNAPSHOT
+  name.value: Example
+  description.value: Example project for Spring Boot
+  # 最多可设 5 层
+  package-name.value: com.yourcompany.example
+  env:
+    # 这个url默认值是: https://spring.io/project_metadata/spring-boot
+    # 会覆盖 bootVersion
+    springBootMetadataUrl:
+    maven:
+      parent:
+        group-id: com.yourcompany
+        artifact-id: parent
+        version: 1.0.0.RELEASE
+    boms:
+      spring-cloud:
+        groupId: org.springframework.cloud
+        artifactId: spring-cloud-dependencies
+        versionProperty: spring-cloud.version
+        order: 3
+        mappings:
+          - compatibilityRange: "[1.4.2.RELEASE,1.4.2.RELEASE]"
+            version: Camden.SR3
+          - compatibilityRange: "[1.5.7.RELEASE,1.5.7.RELEASE]"
+            version: Dalston.SR4
+          - compatibilityRange: "[2.0.4.RELEASE,2.0.4.RELEASE]"
+            version: Finchley.RELEASE
+          - compatibilityRange: "[2.2.0.RELEASE,2.4.0.M1)"
+            version: Hoxton.SR12
+          - compatibilityRange: "[2.4.0.M1,2.6.0-M1)"
+            version: 2020.0.5
+          - compatibilityRange: "[2.6.0-M1,2.6.0-M3)"
+            version: 2021.0.0-M1
+            repositories: spring-milestones
+          - compatibilityRange: "[2.6.0-M3,2.6.0-RC1)"
+            version: 2021.0.0-M3
+            repositories: spring-milestones
+          - compatibilityRange: "[2.6.0-RC1,2.6.1)"
+            version: 2021.0.0-RC1
+            repositories: spring-milestones
+          - compatibilityRange: "[2.6.1,2.6.x-SNAPSHOT)"
+            version: 2021.0.1
+          - compatibilityRange: "[2.6.x-SNAPSHOT,3.0.0-M1)"
+            version: 2021.0.2-SNAPSHOT
+            repositories: spring-snapshots,spring-milestones
+          - compatibilityRange: "[3.0.0-M1,3.1.0-M1)"
+            version: 2022.0.0-M1
+            repositories: spring-milestones
+      kmw:
+        groupId: com.yourcompany.cloud
+        artifactId: kmw-dependencies
+        versionProperty: kmw-dependencies.version
+        order: 1
+        mappings:
+          - compatibilityRange: "[1.4.2.RELEASE,2.7.1.RELEASE]"
+            version: Baojun14-SNAPSHOT
+      spring-boot:
+        groupId: org.springframework.boot
+        artifactId: spring-boot-dependencies
+        versionProperty: spring-boot.version
+        order: 2
+        mappings:
+          - compatibilityRange: "1.4.2.RELEASE"
+            version: 1.4.2.RELEASE
+          - compatibilityRange: "1.5.7.RELEASE"
+            version: 1.5.7.RELEASE
+          - compatibilityRange: "2.0.4.RELEASE"
+            version: 2.0.4.RELEASE
+          - compatibilityRange: "2.7.1.RELEASE"
+            version: 2.7.1.RELEASE
+    platform:
+      compatibility-range: "1.4.2.RELEASE"
+      v1-format-compatibility-range: "[1.4.2.RELEASE,1.5.7.RELEASE]"
+      v2-format-compatibility-range: "[2.0.4.RELEASE,2.7.1.RELEASE]"
+    repositories:
+      spring-releases:
+        name: Spring Releases
+        url: https://repo.spring.io/release
+      sonatype-snapshots:
+        name: Sonatype Snapshots
+        url: https://oss.sonatype.org/content/repositories/snapshots/
+        releasesEnabled: false
+        snapshotsEnabled: true
+  dependencies:
+    - name: 开源基础设施
+      bom: kmw
+      content:
+        - name: Commons
+          id: commons
+          groupId: com.yourcompany.cloud
+          artifactId: icec-cloud-commons
+          description: 公共基础包
+          starter: false
+          compatibility-range: "[1.4.2.RELEASE,1.5.7.RELEASE]"
+        - name: Casslog
+          id: casslog
+          groupId: io.github.studeyang
+          artifactId: casslog-spring-boot-starter
+          description: 日志工具类
+          starter: true
+          links:
+            - rel: reference
+              href: {用户文档}
+    - name: 开发工具
+      content:
+        - name: Spring Boot DevTools
+          id: devtools
+          groupId: org.springframework.boot
+          artifactId: spring-boot-devtools
+          scope: runtime
+          description: Provides fast application restarts, LiveReload, and configurations for enhanced development experience.
+          starter: false
+          links:
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#using-boot-devtools
+        - name: Spring Configuration Processor
+          id: configuration-processor
+          groupId: org.springframework.boot
+          artifactId: spring-boot-configuration-processor
+          scope: annotationProcessor
+          description: Generate metadata for developers to offer contextual help and "code completion" when working with custom configuration keys (ex.application.properties/.yml files).
+          starter: false
+          links:
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#configuration-metadata-annotation-processor
+        - name: Validation
+          id: validation
+          description: Bean Validation with Hibernate validator.
+          facets:
+            - native
+          links:
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-validation
+    - name: Web
+      content:
+        - name: Spring Web
+          id: web
+          description: Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.
+          facets:
+            - web
+            - json
+            - native
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/rest-service/
+              description: Building a RESTful Web Service
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-developing-web-applications
+            - rel: guide
+              href: https://spring.io/guides/gs/serving-web-content/
+              description: Serving Web Content with Spring MVC
+            - rel: guide
+              href: https://spring.io/guides/tutorials/bookmarks/
+              description: Building REST services with Spring
+        - name: Spring Reactive Web
+          id: webflux
+          description: Build reactive web applications with Spring WebFlux and Netty.
+          facets:
+            - json
+            - reactive
+            - native
+        - name: Spring Session
+          id: session
+          groupId: org.springframework.session
+          artifactId: spring-session-core
+          description: Provides an API and implementations for managing user session information.
+          starter: false
+    - name: SQL
+      content:
+        - name: MyBatis
+          id: mybatis
+          compatibilityRange: "[1.4.2.RELEASE,2.7.1.RELEASE]"
+          description: Persistence framework with support for custom SQL, stored procedures and advanced mappings. MyBatis couples objects with stored procedures or SQL statements using a XML descriptor or annotations.
+          links:
+            - rel: guide
+              href: https://github.com/mybatis/spring-boot-starter/wiki/Quick-Start
+              description: MyBatis Quick Start
+            - rel: reference
+              href: https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
+        - name: MyBatis Plus
+          id: mybatis-plus
+          compatibilityRange: "[1.4.2.RELEASE,3.0.0.RELEASE)"
+          description: An powerful enhanced toolkit of MyBatis for simplify development.
+          groupId: com.baomidou
+          artifactId: mybatis-plus-boot-starter
+          version: 3.2.0
+          links:
+            - rel: guide
+              href: https://baomidou.com/pages/24112f/
+              description: MyBatis-Plus 快速开始
+            - rel: reference
+              href: https://baomidou.com/
+        - name: Hikari CP
+          id: hikari
+          description: A JDBC Connection Pool.
+          groupId: com.zaxxer
+          artifactId: HikariCP
+          scope: runtime
+          starter: false
+        - name: MS SQL Server Driver
+          id: sqlserver
+          description: A JDBC and R2DBC driver that provides access to Microsoft SQL Server and Azure SQL Database from any Java application.
+          groupId: com.microsoft.sqlserver
+          artifactId: mssql-jdbc
+          scope: runtime
+          starter: false
+        - name: MySQL Driver
+          id: mysql
+          description: MySQL JDBC and R2DBC driver.
+          facets:
+            - native
+          groupId: mysql
+          artifactId: mysql-connector-java
+          scope: runtime
+          starter: false
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/accessing-data-mysql/
+              description: Accessing data with MySQL
+        - name: Oracle Driver
+          id: oracle
+          description: A JDBC driver that provides access to Oracle.
+          groupId: com.oracle.database.jdbc
+          artifactId: ojdbc8
+          scope: runtime
+          starter: false
+        - name: PostgreSQL Driver
+          id: postgresql
+          description: A JDBC and R2DBC driver that allows Java programs to connect to a PostgreSQL database using standard, database independent Java code.
+          facets:
+            - native
+          groupId: org.postgresql
+          artifactId: postgresql
+          scope: runtime
+          starter: false
+    - name: NoSQL
+      content:
+        - name: Spring Data Redis (Access+Driver)
+          id: data-redis
+          description: Advanced and thread-safe Java Redis client for synchronous, asynchronous, and reactive usage. Supports Cluster, Sentinel, Pipelining, Auto-Reconnect, Codecs and much more.
+          facets:
+            - native
+          aliases:
+            - redis
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/messaging-redis/
+              description: Messaging with Redis
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-redis
+        - name: Spring cache abstraction
+          id: cache
+          description: Provides cache-related operations, such as the ability to update the content of the cache, but does not provide the actual data store.
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/caching/
+              description: Caching Data with Spring
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-caching
+        - name: Spring Data Reactive Redis
+          id: data-redis-reactive
+          description: Access Redis key-value data stores in a reactive fashion with Spring Data Redis.
+          facets:
+            - reactive
+            - native
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/messaging-redis/
+              description: Messaging with Redis
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-redis
+        - name: Spring Data MongoDB
+          id: data-mongodb
+          description: Store data in flexible, JSON-like documents, meaning fields can vary from document to document and data structure can be changed over time.
+          facets:
+            - native
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/accessing-data-mongodb/
+              description: Accessing Data with MongoDB
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-mongodb
+        - name: Spring Data Reactive MongoDB
+          id: data-mongodb-reactive
+          description: Provides asynchronous stream processing with non-blocking back pressure for MongoDB.
+          facets:
+            - reactive
+            - native
+          links:
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-mongodb
+        - name: Spring Data Elasticsearch (Access+Driver)
+          id: data-elasticsearch
+          description: A distributed, RESTful search and analytics engine with Spring Data Elasticsearch.
+          facets:
+            - native
+          links:
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-elasticsearch
+    - name: 运维监控
+      content:
+        - name: Spring Boot Actuator
+          id: actuator
+          description: Supports built in (or custom) endpoints that let you monitor and manage your application - such as application health, metrics, sessions, etc.
+          facets:
+            - native
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/actuator-service/
+              description: Building a RESTful Web Service with Spring Boot Actuator
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#production-ready
+        - name: Prometheus
+          id: prometheus
+          groupId: io.micrometer
+          artifactId: micrometer-registry-prometheus
+          scope: runtime
+          starter: false
+          description: Expose Micrometer metrics in Prometheus format, an in-memory dimensional time series database with a simple built-in UI, a custom query language, and math operations.
+          links:
+            - rel: reference
+              href: https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/html/production-ready-features.html#production-ready-metrics-export-prometheus
+    - name: Spring Cloud
+      bom: spring-cloud
+      content:
+        - name: Config Client
+          id: cloud-config-client
+          description: Client that connects to a Spring Cloud Config Server to fetch the application's configuration.
+          facets:
+            - native
+          groupId: org.springframework.cloud
+          artifactId: spring-cloud-starter-config
+          links:
+            - rel: reference
+              href: https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#_client_side_usage
+              description: Config Client Quick Start
+        - name: Eureka Discovery Client
+          id: cloud-eureka
+          description: A REST based service for locating services for the purpose of load balancing and failover of middle-tier servers.
+          groupId: org.springframework.cloud
+          artifactId: spring-cloud-starter-netflix-eureka-client
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/service-registration-and-discovery/
+              description: Service Registration and Discovery with Eureka and Spring Cloud
+            - rel: reference
+              href: https://docs.spring.io/spring-cloud-netflix/docs/current/reference/html/#service-discovery-eureka-clients
+        - name: Gateway
+          id: cloud-gateway
+          groupId: org.springframework.cloud
+          artifactId: spring-cloud-starter-gateway
+          description: Provides a simple, yet effective way to route to APIs and provide cross cutting concerns to them such as security, monitoring/metrics, and resiliency.
+          links:
+            - rel: guide
+              href: https://github.com/spring-cloud-samples/spring-cloud-gateway-sample
+              description: Using Spring Cloud Gateway
+        - name: OpenFeign
+          id: cloud-feign
+          description: Declarative REST Client. OpenFeign creates a dynamic implementation of an interface decorated with JAX-RS or Spring MVC annotations.
+          groupId: org.springframework.cloud
+          artifactId: spring-cloud-starter-openfeign
+          compatibilityRange: "[2.0.0.RELEASE,3.0.0.RELEASE)"
+          links:
+            - rel: sample
+              href: https://github.com/spring-cloud-samples/feign-eureka
+              description: Declarative REST calls with Spring Cloud OpenFeign sample
+            - rel: reference
+              href: https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/
+        - name: Starter Feign
+          id: starter-feign
+          description: feign 远程调用
+          groupId: org.springframework.cloud
+          artifactId: spring-cloud-starter-feign
+          compatibilityRange: "[1.4.2.RELEASE,2.0.0.RELEASE)"
+        - name: Cloud LoadBalancer
+          id: cloud-loadbalancer
+          description: Client-side load-balancing with Spring Cloud LoadBalancer.
+          groupId: org.springframework.cloud
+          artifactId: spring-cloud-starter-loadbalancer
+          links:
+            - rel: guide
+              href: https://spring.io/guides/gs/spring-cloud-loadbalancer/
+              description: Client-side load-balancing with Spring Cloud LoadBalancer
+            - rel: reference
+              href: https://docs.spring.io/spring-cloud-commons/docs/current/reference/html/#spring-cloud-loadbalancer
+        - name: Resilience4J
+          id: cloud-resilience4j
+          description: Spring Cloud Circuit breaker with Resilience4j as the underlying implementation.
+          groupId: org.springframework.cloud
+          artifactId: spring-cloud-starter-circuitbreaker-resilience4j
+          links:
+            - rel: reference
+              href: https://cloud.spring.io/spring-cloud-static/spring-cloud-circuitbreaker/current/reference/html
+    - name: Testing
+      content:
+        - name: Embedded MongoDB Database
+          id: flapdoodle-mongo
+          description: Provides a platform neutral way for running MongoDB in unit tests.
+          groupId: de.flapdoodle.embed
+          artifactId: de.flapdoodle.embed.mongo
+          scope: test
+          starter: false
+        - name: H2 Database
+          id: h2
+          description: Provides a fast in-memory database that supports JDBC API and R2DBC access, with a small (2mb) footprint. Supports embedded and server modes as well as a browser based console application.
+          facets:
+            - native
+          groupId: com.h2database
+          artifactId: h2
+          scope: test
+          starter: false
+  types:
+    - name: None
+      id: based-project
+      description: Generate a Maven based project archive.
+      tags:
+        build: maven
+        format: based-project
+      action: /starter.zip
+    - name: 分层架构
+      id: maven-project
+      description: Generate a Zebra project archive.
+      tags:
+        build: maven
+        format: zebra-project
+      default: true
+      action: /starter.zip
+  packagings:
+    - name: Jar
+      id: jar
+      default: true
+  javaVersions:
+    - id: 1.8
+      name: 8
+      default: true
+  languages:
+    - name: Java
+      id: java
+      default: true
+  bootVersions:
+    - name: 1.4.2
+      id: 1.4.2.RELEASE
+      default: true
+    - name: 1.5.7
+      id: 1.5.7.RELEASE
+      default: false
+    - name: 2.0.4
+      id: 2.0.4.RELEASE
+      default: false
+    - name: 2.7.1
+      id: 2.7.1.RELEASE
+      default: false
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  devtools:
+    restart:
+      additional_paths:
+        - start-client/public/
+      additional_exclude: "**/*.js,**/*.css,**/*.html"
+  web:
+    resources:
+      static-locations:
+        - file:start-client/public/
+security:
+  redirect-uri: http://127.0.0.1:8081/oauth/redirect

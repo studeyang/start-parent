@@ -1,0 +1,69 @@
+{
+  "id": "spring-boot",
+  "name": "Spring Boot",
+  "projectReleases": [
+    {
+      "current": false,
+      "releaseStatus": "SNAPSHOT",
+      "snapshot": true,
+      "version": "3.0.0-SNAPSHOT",
+      "versionDisplayName": "3.0.0-SNAPSHOT"
+    },
+    {
+      "current": false,
+      "releaseStatus": "SNAPSHOT",
+      "snapshot": true,
+      "version": "3.0.0-M1",
+      "versionDisplayName": "3.0.0-M1"
+    },
+    {
+      "current": false,
+      "releaseStatus": "SNAPSHOT",
+      "snapshot": true,
+      "version": "2.6.0-SNAPSHOT",
+      "versionDisplayName": "2.6.0-SNAPSHOT"
+    },
+    {
+      "current": false,
+      "releaseStatus": "RC",
+      "snapshot": true,
+      "version": "2.6.0-RC1",
+      "versionDisplayName": "2.6.0-RC1"
+    },
+    {
+      "current": false,
+      "releaseStatus": "SNAPSHOT",
+      "snapshot": true,
+      "version": "2.5.7-SNAPSHOT",
+      "versionDisplayName": "2.5.7-SNAPSHOT"
+    },
+    {
+      "current": true,
+      "releaseStatus": "GENERAL_AVAILABILITY",
+      "snapshot": false,
+      "version": "2.5.6",
+      "versionDisplayName": "2.5.6"
+    },
+    {
+      "current": false,
+      "releaseStatus": "GENERAL_AVAILABILITY",
+      "snapshot": false,
+      "version": "2.4.12",
+      "versionDisplayName": "2.4.12"
+    },
+    {
+      "current": false,
+      "releaseStatus": "GENERAL_AVAILABILITY",
+      "snapshot": false,
+      "version": "2.3.12.RELEASE",
+      "versionDisplayName": "2.3.12.RELEASE"
+    },
+    {
+      "current": false,
+      "releaseStatus": "GENERAL_AVAILABILITY",
+      "snapshot": false,
+      "version": "2.2.13.RELEASE",
+      "versionDisplayName": "2.2.13.RELEASE"
+    }
+  ]
+}

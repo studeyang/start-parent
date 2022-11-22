@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.spring.initializr</groupId>
+		<artifactId>initializr-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>../initializr-parent</relativePath>
+	</parent>
+	<artifactId>initializr-metadata</artifactId>
+	<name>Spring Initializr :: Metadata</name>
+
+	<properties>
+		<main.basedir>${basedir}/..</main.basedir>
+	</properties>
+	<scm>
+		<url>${git.url}</url>
+		<connection>${git.connection}</connection>
+		<developerConnection>${git.developerConnection}</developerConnection>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.spring.initializr</groupId>
+			<artifactId>initializr-generator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.spring.initializr</groupId>
+		<artifactId>initializr-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>../initializr-parent</relativePath>
+	</parent>
+	<artifactId>initializr-version-resolver</artifactId>
+	<name>Spring Initializr :: Version Resolver</name>
+
+	<properties>
+		<main.basedir>${basedir}/..</main.basedir>
+	</properties>
+	<scm>
+		<url>${git.url}</url>
+		<connection>${git.connection}</connection>
+		<developerConnection>${git.developerConnection}</developerConnection>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-resolver-provider</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.resolver</groupId>
+			<artifactId>maven-resolver-connector-basic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.resolver</groupId>
+			<artifactId>maven-resolver-transport-http</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>
