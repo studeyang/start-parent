@@ -1,5 +1,6 @@
 package io.spring.start.site.security.resource;
 
+import io.spring.start.site.security.SecurityProperties;
 import io.spring.start.site.security.biz.CICDTriggerProcessor;
 import io.spring.start.site.security.biz.CreateDevopsProcessor;
 import io.spring.start.site.security.biz.CreateGitlabProjectProcessor;
@@ -40,13 +41,15 @@ public class GitlabResourceController {
     private CreateDevopsProcessor createDevopsProcessor;
     @Autowired
     private CICDTriggerProcessor cicdTriggerProcessor;
+    @Autowired
+    private SecurityProperties securityProperties;
 
     @GetMapping(value = "/groups", produces = MediaType.APPLICATION_JSON_VALUE)
     public Response<List<Group>> getGroups() {
         HttpEntity<Object> httpEntity = AuthorizationSupport.fillHeaderWithToken();
 
         ResponseEntity<Group[]> groups = restTemplate.exchange(
-                "https://gitlab.yourcompany.net/api/v4/groups",
+                securityProperties.getBaseUrl() + "/api/v4/groups",
                 HttpMethod.GET,
                 httpEntity,
                 Group[].class);
@@ -59,24 +62,25 @@ public class GitlabResourceController {
 
     @GetMapping("/{id}/branches")
     public Response<List<Branch>> getBranches(@PathVariable("id") String id) {
-        HttpEntity<Object> httpEntity = AuthorizationSupport.fillHeaderWithAdminToken();
-        ResponseEntity<Branch[]> branches = restTemplate.exchange(
-                "https://gitlab.yourcompany.net/api/v4/projects/" + id + "/repository/branches",
-                HttpMethod.GET,
-                httpEntity,
-                Branch[].class);
-        Response<List<Branch>> response = branches.getBody() == null ?
-                Response.data(new ArrayList<>()) :
-                Response.data(Arrays.stream(branches.getBody()).collect(Collectors.toList()));
-        log.info("response: {}", response);
-        return response;
+//        HttpEntity<Object> httpEntity = AuthorizationSupport.fillHeaderWithAdminToken();
+//        ResponseEntity<Branch[]> branches = restTemplate.exchange(
+//                "https://gitlab.com/api/v4/projects/" + id + "/repository/branches",
+//                HttpMethod.GET,
+//                httpEntity,
+//                Branch[].class);
+//        Response<List<Branch>> response = branches.getBody() == null ?
+//                Response.data(new ArrayList<>()) :
+//                Response.data(Arrays.stream(branches.getBody()).collect(Collectors.toList()));
+//        log.info("response: {}", response);
+//        return response;
+        return Response.data(new ArrayList<>());
     }
 
     @PostMapping("/project")
     public Response<Object> createProject(@RequestBody RunProjectProcessRequest request) {
         log.info("create project request: {}", request);
         return ProcessorChain.beginWith(createGitlabProjectProcessor)
-                .then(createDevopsProcessor)
+//                .then(createDevopsProcessor)
 //                .then(cicdTriggerProcessor)
                 .startUp(request);
     }

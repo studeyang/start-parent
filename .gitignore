@@ -2,6 +2,7 @@ target
 !.mvn/wrapper/maven-wrapper.jar
 .flattened-pom.xml
 logs
+.run
 
 ### STS ###
 .apt_generated
@@ -35,3 +36,6 @@ logs
 /start-client/package-lock.json
 /start-client/yarn-error.log
 /start-client/analysis
+
+### 脱敏 ###
+/start-site/src/main/resources/application-dev.yml

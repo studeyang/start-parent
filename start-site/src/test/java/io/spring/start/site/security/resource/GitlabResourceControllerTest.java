@@ -19,7 +19,7 @@ public class GitlabResourceControllerTest {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Object> httpEntity = AuthorizationSupport.fillHeaderWithAdminToken();
         ResponseEntity<Branch[]> response = restTemplate.exchange(
-                "https://gitlab.yourcompany.net/api/v4/projects/1944/repository/branches",
+                "https://gitlab.com/api/v4/projects/1944/repository/branches",
                 HttpMethod.GET,
                 httpEntity,
                 Branch[].class);

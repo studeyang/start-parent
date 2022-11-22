@@ -1,5 +1,6 @@
 package io.spring.start.site.security.biz;
 
+import io.spring.start.site.security.SecurityProperties;
 import io.spring.start.site.security.bo.CreateDevopsResult;
 import io.spring.start.site.security.bo.ProcessRequest;
 import io.spring.start.site.security.dto.RepositoryFileBody;
@@ -21,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class CreateDevopsProcessor implements TransactionProcessor<CreateDevopsResult> {
 
-    private static final String BASE_URL = "https://gitlab.yourcompany.net/api/v4/projects/1944/repository/files";
+    private static final String BASE_PATH = "/api/v4/projects/1944/repository/files";
     private static final String AUTHOR = "start.yourcompany.com";
     private static final String AUTHOR_EMAIL = "start@yourcompany.com";
     private static final String DEPLOY_CONTENT = "deployment:\n" +
@@ -45,6 +46,8 @@ public class CreateDevopsProcessor implements TransactionProcessor<CreateDevopsR
             "    CASSMALL_SERVICE_ID: '{SERVICE_NAME}'";
     private final RestTemplate restTemplate;
 
+    private final SecurityProperties securityProperties;
+
     @Override
     public CreateDevopsResult process(ProcessRequest request) throws ProcessException {
 
@@ -62,7 +65,7 @@ public class CreateDevopsProcessor implements TransactionProcessor<CreateDevopsR
     }
 
     void createDeployFile(RunProjectProcessRequest runProjectProcessRequest) {
-        String url = BASE_URL + "/{file}";
+        String url = securityProperties.getBaseUrl() + BASE_PATH + "/{file}";
 
         RepositoryFileBody body = new RepositoryFileBody();
         body.setBranch(runProjectProcessRequest.getBranch());
@@ -93,7 +96,7 @@ public class CreateDevopsProcessor implements TransactionProcessor<CreateDevopsR
     }
 
     void updateJenkinsfile(RunProjectProcessRequest runProjectProcessRequest) {
-        String url = BASE_URL + "/{file}";
+        String url = securityProperties.getBaseUrl() + BASE_PATH + "/{file}";
 
         RepositoryFileBody body = new RepositoryFileBody();
         body.setBranch(runProjectProcessRequest.getBranch());
@@ -112,7 +115,7 @@ public class CreateDevopsProcessor implements TransactionProcessor<CreateDevopsR
     }
 
     private String getJenkinsfile(RunProjectProcessRequest runProjectProcessRequest) {
-        String url = BASE_URL + "/{file}/raw" + "?ref=" + runProjectProcessRequest.getBranch();
+        String url = securityProperties.getBaseUrl() + BASE_PATH + "/{file}/raw" + "?ref=" + runProjectProcessRequest.getBranch();
 
         HttpEntity<Object> httpEntity = AuthorizationSupport.fillHeaderWithAdminToken();
         ResponseEntity<String> file = restTemplate.exchange(

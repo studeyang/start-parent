@@ -79,17 +79,19 @@ public class ResourceSecurityConfiguration {
     public CreateGitlabProjectProcessor createGitlabProjectProcessor(
             RestTemplate restTemplate,
             ApplicationContext applicationContext,
-            ObjectProvider<ProjectRequestPlatformVersionTransformer> platformVersionTransformer) {
+            ObjectProvider<ProjectRequestPlatformVersionTransformer> platformVersionTransformer,
+            SecurityProperties securityProperties) {
         ProjectRequestPlatformVersionTransformer transformer =
                 platformVersionTransformer.getIfAvailable(DefaultProjectRequestPlatformVersionTransformer::new);
         ProjectGenerationInvoker<ProjectRequest> projectGenerationInvoker = new ProjectGenerationInvoker<>(
                 applicationContext, new DefaultProjectRequestToDescriptionConverter(transformer));
-        return new CreateGitlabProjectProcessor(restTemplate, projectGenerationInvoker);
+        return new CreateGitlabProjectProcessor(restTemplate, projectGenerationInvoker, securityProperties);
     }
 
     @Bean
-    public CreateDevopsProcessor createDevopsProcessor(RestTemplate restTemplate) {
-        return new CreateDevopsProcessor(restTemplate);
+    public CreateDevopsProcessor createDevopsProcessor(
+            RestTemplate restTemplate, SecurityProperties securityProperties) {
+        return new CreateDevopsProcessor(restTemplate, securityProperties);
     }
 
     @Bean

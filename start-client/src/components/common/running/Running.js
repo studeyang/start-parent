@@ -133,16 +133,16 @@ function Running() {
               <Form.Select.Option value={group.id}>{group.name}</Form.Select.Option>
             )}
           </Form.Select>
-          <Form.Select
-            label={<Tooltip content="CICD配置的分支" style={tipStyle}>icec-devops 分支</Tooltip>}
-            placeholder='请选择CICD所属分支'
-            field='branchName'
-            style={{ width: 360 }}
-          >
-            {gitlabBranches.map(branch =>
-              <Form.Select.Option value={branch.name}>{branch.name}</Form.Select.Option>
-            )}
-          </Form.Select>
+          {/*<Form.Select*/}
+          {/*  label={<Tooltip content="CICD配置的分支" style={tipStyle}>icec-devops 分支</Tooltip>}*/}
+          {/*  placeholder='请选择CICD所属分支'*/}
+          {/*  field='branchName'*/}
+          {/*  style={{ width: 360 }}*/}
+          {/*>*/}
+          {/*  {gitlabBranches.map(branch =>*/}
+          {/*    <Form.Select.Option value={branch.name}>{branch.name}</Form.Select.Option>*/}
+          {/*  )}*/}
+          {/*</Form.Select>*/}
         </Form>
       </Modal>
     </>

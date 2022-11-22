@@ -36,12 +36,16 @@ spring:
         use-last-modified: false
 
 security:
-  authorization-uri: https://gitlab.yourcompany.net/oauth/authorize
-  token-uri: https://gitlab.yourcompany.net/oauth/token
-  user-info-uri: https://gitlab.yourcompany.net/api/v4/user
-  redirect-uri: https://127.0.0.1:8081/oauth/redirect
-  client-id: b9c3585d916bdae87213b8a5e1f8d64ae399a89e837c646ddd46f139c42d7d22
-  client-secret: 8f17127413df232a1535b7f4fb86a868e7dc3ba67d89c366d274f9e9fa115cf0
+  base-url: https://gitlab.com
+  authorization-uri: ${security.base-url}/oauth/authorize
+  token-uri: ${security.base-url}/oauth/token
+  user-info-uri: ${security.base-url}/api/v4/user
+  redirect-uri: http://127.0.0.1:8081/oauth/redirect
+  client-id: gitlab client id
+  client-secret: gitlab client secret
+  admin:
+    name: your gitlab admin username
+    password: your gitlab admin password
 
 initializr:
   groupId.value: com.yourcompany

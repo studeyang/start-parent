@@ -26,8 +26,6 @@ import java.io.IOException;
 @RequestMapping("oauth")
 public class OAuth2Controller {
 
-    private static final String TOKEN_URI = "https://gitlab.yourcompany.net/oauth/token";
-
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
@@ -46,7 +44,7 @@ public class OAuth2Controller {
         paramMap.add("grant_type", "authorization_code");
         paramMap.add("redirect_uri", properties.getRedirectUri());
 
-        Token token = restTemplate.postForObject(TOKEN_URI, paramMap, Token.class);
+        Token token = restTemplate.postForObject(properties.getTokenUri(), paramMap, Token.class);
         saveToken(token);
         log.info("token: {}", token);
         log.info("state: {}", state);

@@ -4,6 +4,7 @@ import io.spring.initializr.web.project.ProjectGenerationInvoker;
 import io.spring.initializr.web.project.ProjectGenerationResult;
 import io.spring.initializr.web.project.ProjectRequest;
 import io.spring.initializr.web.project.WebProjectRequest;
+import io.spring.start.site.security.SecurityProperties;
 import io.spring.start.site.security.bo.ProcessRequest;
 import io.spring.start.site.security.dto.CreateProjectResponse;
 import io.spring.start.site.security.dto.RunProjectProcessRequest;
@@ -32,6 +33,7 @@ public class CreateGitlabProjectProcessor implements TransactionProcessor<Create
 
     private final RestTemplate restTemplate;
     private final ProjectGenerationInvoker<ProjectRequest> projectGenerationInvoker;
+    private final SecurityProperties securityProperties;
 
     @Override
     public CreateProjectResponse process(ProcessRequest processRequest) throws ProcessException {
@@ -40,7 +42,7 @@ public class CreateGitlabProjectProcessor implements TransactionProcessor<Create
 
         // 创建 gitlab 工程
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://gitlab.yourcompany.net/api/v4/projects")
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(securityProperties.getBaseUrl() + "/api/v4/projects")
                     .queryParam("name", runProjectProcessRequest.getProjectName())
                     .queryParam("path", runProjectProcessRequest.getPath())
                     .queryParam("namespace_id", runProjectProcessRequest.getNamespaceId());
@@ -83,7 +85,7 @@ public class CreateGitlabProjectProcessor implements TransactionProcessor<Create
         HttpEntity<Object> httpEntity = AuthorizationSupport.fillHeaderWithToken();
         try {
             restTemplate.exchange(
-                    "https://gitlab.yourcompany.net/api/v4/projects/" + projectId,
+                    securityProperties.getBaseUrl() + "/api/v4/projects/" + projectId,
                     HttpMethod.DELETE,
                     httpEntity,
                     Void.class);
@@ -108,8 +110,10 @@ public class CreateGitlabProjectProcessor implements TransactionProcessor<Create
         command.append("git init && ");
         command.append("git add . && ");
         String projectName = result.getProjectGenerationResult().getProjectDescription().getArtifactId();
-        command.append("git commit -m 一键运行:").append(projectName).append(" && ");
-        String gitUrl = result.getHttpUrl().replace("https://", "https://scan:scan%40casstime2021@");
+        command.append("git commit -m 创建工程:").append(projectName).append(" && ");
+        SecurityProperties.Admin admin = securityProperties.getAdmin();
+        String gitUrl = result.getHttpUrl().replace("https://",
+                "https://" + admin.getName() + ":" + admin.getPassword() + "@");
         command.append("git push -f ").append(gitUrl).append(" master:master");
 
         exec(command.toString());

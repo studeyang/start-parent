@@ -1,5 +1,6 @@
 package io.spring.start.site.security.biz;
 
+import io.spring.start.site.security.SecurityProperties;
 import io.spring.start.site.security.bo.ProcessRequest;
 import io.spring.start.site.security.dto.RunProjectProcessRequest;
 import org.junit.Test;
@@ -11,7 +12,8 @@ import org.springframework.web.client.RestTemplate;
  */
 public class CreateDevopsProcessorTest {
 
-    private CreateDevopsProcessor createDevopsProcessor = new CreateDevopsProcessor(new RestTemplate());
+    private CreateDevopsProcessor createDevopsProcessor = new CreateDevopsProcessor(
+            new RestTemplate(), new SecurityProperties());
 
     @Test
     public void process() {
