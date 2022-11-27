@@ -86,7 +86,7 @@ const config = {
             minifyCSS: true,
           },
       template: './static/index.html',
-      title: 'Casstime Java Initializr',
+      title: 'Java Initializr',
       description: `Initializr generates spring boot project with just what you need to start quickly!`,
       url: 'https://start.spring.io',
       twitter: '@springboot',
