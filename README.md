@@ -4,15 +4,15 @@
 
 ### 【主界面】
 
-![image-20221127105801834](https://technotes.oss-cn-shenzhen.aliyuncs.com/2022/202211271058880.png)
+![主界面](docs/主界面.png)
 
 ### 【依赖管理】
 
-![image-20221127105843292](https://technotes.oss-cn-shenzhen.aliyuncs.com/2022/202211271058355.png)
+![依赖管理](docs/依赖管理.png)
 
 ### 【代码预览】
 
-![image-20221127105901107](https://technotes.oss-cn-shenzhen.aliyuncs.com/2022/202211271059163.png)
+![代码预览](docs/代码预览.png)
 
 # 环境搭建
 
@@ -24,4 +24,4 @@
 
 # 联系作者
 
-![image-20221127122036490](https://technotes.oss-cn-shenzhen.aliyuncs.com/2022/202211271220542.png)
+![image-20221127122036490](docs/contact.png)
