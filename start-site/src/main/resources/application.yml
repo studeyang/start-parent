@@ -40,12 +40,12 @@ security:
   authorization-uri: ${security.base-url}/oauth/authorize
   token-uri: ${security.base-url}/oauth/token
   user-info-uri: ${security.base-url}/api/v4/user
-  redirect-uri: http://127.0.0.1:8081/oauth/redirect
-  client-id: gitlab client id
-  client-secret: gitlab client secret
+  redirect-uri: http://127.0.0.1:8080/oauth/redirect
+  client-id: 326e1886e1af3ddc904233a559f5005cb75a4608277c806b0c7ca93ef6b331fa
+  client-secret: aa03373ee6224f2c493d45167a2ac942957d4d4111f39edf2d14f57aadac9b3c
   admin:
-    name: your gitlab admin username
-    password: your gitlab admin password
+    name: StartSiteDemo
+    password: qwert123
 
 initializr:
   groupId.value: com.yourcompany

@@ -11,3 +11,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/repo.huaweicloud.com/g' /etc/apk/repositori
     git config --global user.email "start@yourcompany.com" && \
     git config --global user.name "start.yourcompany.com" && \
     git config --list
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "start-site-exec.jar"]
