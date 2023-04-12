@@ -8,11 +8,17 @@
 
 ### 【依赖管理】
 
-![依赖管理](docs/依赖管理.png)
+![iShot_2023-04-12_22.57.16](https://technotes.oss-cn-shenzhen.aliyuncs.com/2023/202304122258783.gif)
 
 ### 【代码预览】
 
-![代码预览](docs/代码预览.png)
+![iShot_2023-04-12_23.00.31](https://technotes.oss-cn-shenzhen.aliyuncs.com/2023/202304122301753.gif)
+
+### 【创建工程】
+
+![iShot_2023-04-12_23.10.29](https://technotes.oss-cn-shenzhen.aliyuncs.com/2023/202304122311159.gif)
+
+
 
 # 快速体验
 
