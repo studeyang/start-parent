@@ -135,7 +135,7 @@ public abstract class ProjectGenerationController<R extends ProjectRequest> {
 		ProjectGenerationResult result = this.projectGenerationInvoker.invokeProjectStructureGeneration(request);
 		Path archive = createArchive(result, "tar.gz", this::createTarArchiveOutputStream, TarArchiveEntry::new,
 				TarArchiveEntry::setMode);
-		return upload(archive, result.getRootDirectory(), generateFileName(request, "tar.gz"),
+		return upload(archive, result.getRootDirectory(), generateFileName(request, "request = {WebProjectRequest@7247} tar.gz"),
 				"application/x-compress");
 	}
 

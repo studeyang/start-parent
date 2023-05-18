@@ -81,6 +81,8 @@ class VersionTests {
 
 	@Test
 	void compareHigherQualifier() {
+		// M 指的是milestone版本
+		// RC：Release Candidate 预正式版，供社区测试
 		assertThat(parse("1.2.0.RC1")).isGreaterThan(parse("1.2.0.M1"));
 	}
 
@@ -121,6 +123,7 @@ class VersionTests {
 
 	@Test
 	void snapshotGreaterThanRC() {
+		// BUILD-SNAPSHOT版本的好处是，每次构建都会生成一个新版本号
 		assertThat(parse("1.2.0.BUILD-SNAPSHOT")).isGreaterThan(parse("1.2.0.RC1"));
 	}
 

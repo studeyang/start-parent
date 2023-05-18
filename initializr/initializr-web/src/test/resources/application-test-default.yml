@@ -109,7 +109,7 @@ initializr:
       id: maven-project
       tags:
         build: maven
-        format: project
+        format: based-project
       default: true
       action: /starter.zip
     - name: Gradle Config
@@ -123,7 +123,7 @@ initializr:
       id: gradle-project
       tags:
         build: gradle
-        format: project
+        format: based-project
       default: false
       action: /starter.zip
   packagings:

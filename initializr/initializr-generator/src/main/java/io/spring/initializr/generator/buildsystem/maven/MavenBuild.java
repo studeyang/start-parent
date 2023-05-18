@@ -21,9 +21,6 @@ import io.spring.initializr.generator.buildsystem.BuildItemResolver;
 import io.spring.initializr.generator.buildsystem.MavenRepositoryContainer;
 import io.spring.initializr.generator.buildsystem.maven.MavenBuildSettings.Builder;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Maven-specific {@linkplain Build build configuration}.
  *

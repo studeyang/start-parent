@@ -14,7 +14,8 @@ public interface ProjectFormat {
 
     static ProjectFormat format(String format) {
         return SpringFactoriesLoader.loadFactories(ProjectFormatFactory.class, ProjectFormat.class.getClassLoader())
-                .stream().map((factory) -> factory.create(format)).filter(Objects::nonNull).findFirst()
+                .stream()
+                .map(factory -> factory.create(format)).filter(Objects::nonNull).findFirst()
                 .orElseThrow(() -> new IllegalStateException(
                         "Unrecognized project format '" + format + "'"));
     }

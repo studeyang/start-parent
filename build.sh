@@ -18,10 +18,10 @@ if [ $? != 0 ]; then
 fi
 
 # 打镜像
-docker rmi studeyang/start-site:0.0.2
-docker build -t studeyang/start-site:0.0.2 .
-docker login -u {usr} -p {pwd} swr.cn-south-1.myhuaweicloud.com
-docker push studeyang/start-site:0.0.2
+docker rmi studeyang/start-site:1.0.0
+docker build -t studeyang/start-site:1.0.0 .
+#docker login -u {usr} -p {pwd} swr.cn-south-1.myhuaweicloud.com
+docker push studeyang/start-site:1.0.0
 
 # run
 docker run -d \

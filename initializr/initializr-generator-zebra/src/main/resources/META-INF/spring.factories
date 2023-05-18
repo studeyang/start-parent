@@ -1,0 +1,3 @@
+io.spring.initializr.generator.project.ProjectGenerationConfiguration=\
+io.spring.initializr.zebra.autoconfig.ZebraProjectGenerationConfiguration,\
+io.spring.initializr.zebra.autoconfig.ProjectContributorAutoConfiguration
