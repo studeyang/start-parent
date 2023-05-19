@@ -38,7 +38,7 @@
 	</developers>
 
 	<properties>
-		<revision>0.12.1-SNAPSHOT</revision>
+		<revision>0.12.0</revision>
 		<disable.checks>true</disable.checks>
 		<git.url>https://github.com/spring-io/initializr</git.url>
 		<git.connection>scm:git:https://github.com/spring-io/initializr</git.connection>
@@ -58,7 +58,7 @@
 		<module>initializr-parent</module>
 		<module>initializr-service-sample</module>
 		<module>initializr-version-resolver</module>
-		<module>initializr-web</module>
+<!--		<module>initializr-web</module>-->
 		<module>initializr-generator-zebra</module>
 	</modules>
 

@@ -16,25 +16,35 @@
 
 package io.spring.start.site;
 
-import java.io.IOException;
-import java.nio.file.Files;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.spring.initializr.generator.project.MutableProjectDescription;
+import io.spring.initializr.generator.project.ProjectDescription;
+import io.spring.initializr.generator.project.ProjectFormat;
+import io.spring.initializr.metadata.InitializrMetadata;
+import io.spring.initializr.metadata.InitializrMetadataProvider;
+import io.spring.initializr.metadata.Type;
 import io.spring.initializr.versionresolver.DependencyManagementVersionResolver;
-import io.spring.start.site.security.ResourceSecurityConfiguration;
+import io.spring.initializr.web.controller.DefaultProjectGenerationController;
+import io.spring.initializr.web.controller.ProjectGenerationController;
+import io.spring.initializr.web.project.*;
 import io.spring.start.site.project.ProjectDescriptionCustomizerConfiguration;
+import io.spring.start.site.security.ResourceSecurityConfiguration;
 import io.spring.start.site.support.CacheableDependencyManagementVersionResolver;
 import io.spring.start.site.support.StartInitializrMetadataUpdateStrategy;
 import io.spring.start.site.web.HomeController;
-
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
+
+import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * Initializr website application.
@@ -48,25 +58,55 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 public class StartApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StartApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StartApplication.class, args);
+    }
 
-	@Bean
-	public HomeController homeController() {
-		return new HomeController();
-	}
+    @Bean
+    public HomeController homeController() {
+        return new HomeController();
+    }
 
-	@Bean
-	public StartInitializrMetadataUpdateStrategy initializrMetadataUpdateStrategy(
-			RestTemplateBuilder restTemplateBuilder, ObjectMapper objectMapper) {
-		return new StartInitializrMetadataUpdateStrategy(restTemplateBuilder.build(), objectMapper);
-	}
+    @Bean
+    public StartInitializrMetadataUpdateStrategy initializrMetadataUpdateStrategy(
+            RestTemplateBuilder restTemplateBuilder, ObjectMapper objectMapper) {
+        return new StartInitializrMetadataUpdateStrategy(restTemplateBuilder.build(), objectMapper);
+    }
 
-	@Bean
-	public DependencyManagementVersionResolver dependencyManagementVersionResolver() throws IOException {
-		return new CacheableDependencyManagementVersionResolver(DependencyManagementVersionResolver
-				.withCacheLocation(Files.createTempDirectory("version-resolver-cache-")));
-	}
+    @Bean
+    public DependencyManagementVersionResolver dependencyManagementVersionResolver() throws IOException {
+        return new CacheableDependencyManagementVersionResolver(DependencyManagementVersionResolver
+                .withCacheLocation(Files.createTempDirectory("version-resolver-cache-")));
+    }
+
+    @Bean
+    ProjectGenerationController<ProjectRequest> projectGenerationController(
+            InitializrMetadataProvider metadataProvider,
+            ObjectProvider<ProjectRequestPlatformVersionTransformer> platformVersionTransformer,
+            ApplicationContext applicationContext) {
+        ProjectRequestPlatformVersionTransformer transformer = platformVersionTransformer.
+                getIfAvailable(DefaultProjectRequestPlatformVersionTransformer::new);
+        ProjectGenerationInvoker<ProjectRequest> projectGenerationInvoker = new ProjectGenerationInvoker<>(
+                applicationContext, getProjectRequestToDescriptionConverter(transformer));
+        return new DefaultProjectGenerationController(metadataProvider, projectGenerationInvoker);
+    }
+
+    private DefaultProjectRequestToDescriptionConverter getProjectRequestToDescriptionConverter(
+            ProjectRequestPlatformVersionTransformer transformer) {
+        return new DefaultProjectRequestToDescriptionConverter(transformer) {
+            @Override
+            public ProjectDescription convert(ProjectRequest request, InitializrMetadata metadata) {
+                MutableProjectDescription description = new MutableProjectDescription();
+                convert(request, description, metadata);
+                description.setProjectFormat(getProjectFormat(request, metadata));
+                return description;
+            }
+        };
+    }
+
+    private ProjectFormat getProjectFormat(ProjectRequest request, InitializrMetadata metadata) {
+        Type typeFromMetadata = metadata.getTypes().get(request.getType());
+        return ProjectFormat.format(typeFromMetadata.getTags().get("format"));
+    }
 
 }
