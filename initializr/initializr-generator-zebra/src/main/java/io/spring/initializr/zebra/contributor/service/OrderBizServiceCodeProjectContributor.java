@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 
-import static io.spring.initializr.zebra.contributor.support.ContributorSupport.DEFAULT_CODE_CONTRIBUTOR_ORDER;
+import static io.spring.initializr.zebra.contributor.support.ContributorOrder.DEFAULT_CODE_CONTRIBUTOR_ORDER;
 import static java.lang.reflect.Modifier.PRIVATE;
 import static java.lang.reflect.Modifier.PUBLIC;
 

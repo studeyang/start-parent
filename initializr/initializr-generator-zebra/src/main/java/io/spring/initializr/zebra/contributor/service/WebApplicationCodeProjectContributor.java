@@ -4,12 +4,11 @@ import io.spring.initializr.generator.project.ProjectDescription;
 import io.spring.initializr.generator.project.contributor.ProjectContributor;
 import io.spring.initializr.generator.spring.code.MainSourceCodeProjectContributor;
 import io.spring.initializr.generator.spring.code.TestSourceCodeProjectContributor;
+import io.spring.initializr.zebra.contributor.support.ContributorOrder;
 import io.spring.initializr.zebra.contributor.support.ContributorSupport;
 
 import java.io.IOException;
 import java.nio.file.Path;
-
-import static io.spring.initializr.zebra.contributor.support.ContributorSupport.WEB_APPLICATION_CODE_CONTRIBUTOR_ORDER;
 
 /**
  * Service 模块 WebApplication.java 生成
@@ -42,7 +41,7 @@ public class WebApplicationCodeProjectContributor implements ProjectContributor 
 
     @Override
     public int getOrder() {
-        return WEB_APPLICATION_CODE_CONTRIBUTOR_ORDER;
+        return ContributorOrder.WebApplicationCodeProjectContributor;
     }
 
 }

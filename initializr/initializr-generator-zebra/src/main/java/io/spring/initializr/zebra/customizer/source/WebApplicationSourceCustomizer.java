@@ -8,6 +8,7 @@ import io.spring.initializr.generator.language.java.JavaMethodInvocation;
 import io.spring.initializr.generator.language.java.JavaTypeDeclaration;
 import io.spring.initializr.generator.project.ProjectDescription;
 import io.spring.initializr.generator.spring.code.MainApplicationTypeCustomizer;
+import io.spring.initializr.generator.spring.code.SourceCodeProjectGenerationConfiguration;
 
 import java.lang.reflect.Modifier;
 import java.util.LinkedList;
@@ -21,9 +22,12 @@ public class WebApplicationSourceCustomizer implements MainApplicationTypeCustom
         this.description = description;
     }
 
+    /**
+     * 这里已经添加了 @SpringBootApplication：
+     * {@link SourceCodeProjectGenerationConfiguration#springBootApplicationAnnotator()}
+     * */
     @Override
     public void customize(JavaTypeDeclaration typeDeclaration) {
-        typeDeclaration.annotate(Annotation.name("org.springframework.boot.autoconfigure.SpringBootApplication"));
 
         List<String> commons = new LinkedList<>();
         if (description.getRequestedDependencies().containsKey("mysql")) {

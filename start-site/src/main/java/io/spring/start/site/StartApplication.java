@@ -82,17 +82,21 @@ public class StartApplication {
     @Bean
     ProjectGenerationController<ProjectRequest> projectGenerationController(
             InitializrMetadataProvider metadataProvider,
-            ObjectProvider<ProjectRequestPlatformVersionTransformer> platformVersionTransformer,
-            ApplicationContext applicationContext) {
-        ProjectRequestPlatformVersionTransformer transformer = platformVersionTransformer.
-                getIfAvailable(DefaultProjectRequestPlatformVersionTransformer::new);
-        ProjectGenerationInvoker<ProjectRequest> projectGenerationInvoker = new ProjectGenerationInvoker<>(
-                applicationContext, getProjectRequestToDescriptionConverter(transformer));
+            ProjectGenerationInvoker<ProjectRequest> projectGenerationInvoker) {
         return new DefaultProjectGenerationController(metadataProvider, projectGenerationInvoker);
     }
 
-    private DefaultProjectRequestToDescriptionConverter getProjectRequestToDescriptionConverter(
-            ProjectRequestPlatformVersionTransformer transformer) {
+    @Bean
+    public ProjectGenerationInvoker<ProjectRequest> projectGenerationInvoker(ApplicationContext applicationContext
+            , DefaultProjectRequestToDescriptionConverter projectRequestToDescriptionConverter) {
+        return new ProjectGenerationInvoker<>(applicationContext, projectRequestToDescriptionConverter);
+    }
+
+    @Bean
+    public DefaultProjectRequestToDescriptionConverter projectRequestToDescriptionConverter(
+            ObjectProvider<ProjectRequestPlatformVersionTransformer> platformVersionTransformer) {
+        ProjectRequestPlatformVersionTransformer transformer = platformVersionTransformer.
+                getIfAvailable(DefaultProjectRequestPlatformVersionTransformer::new);
         return new DefaultProjectRequestToDescriptionConverter(transformer) {
             @Override
             public ProjectDescription convert(ProjectRequest request, InitializrMetadata metadata) {

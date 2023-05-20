@@ -49,6 +49,11 @@
 		<dependencies>
 			<dependency>
 				<groupId>io.spring.initializr</groupId>
+				<artifactId>initializr-generator-zebra</artifactId>
+				<version>${spring-initializr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.spring.initializr</groupId>
 				<artifactId>initializr-bom</artifactId>
 				<version>${spring-initializr.version}</version>
 				<type>pom</type>

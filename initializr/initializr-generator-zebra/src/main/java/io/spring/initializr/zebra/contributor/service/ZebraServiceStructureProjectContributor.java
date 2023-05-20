@@ -10,14 +10,13 @@ import io.spring.initializr.generator.io.IndentingWriterFactory;
 import io.spring.initializr.generator.project.ProjectDescription;
 import io.spring.initializr.generator.project.contributor.ProjectContributor;
 import io.spring.initializr.generator.version.VersionReference;
+import io.spring.initializr.zebra.contributor.support.ContributorOrder;
 import io.spring.initializr.zebra.contributor.support.ContributorSupport;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static io.spring.initializr.zebra.contributor.support.ContributorSupport.SERVICE_STRUCTURE_CONTRIBUTOR_ORDER;
 
 /**
  * Service 模块基础结构生成
@@ -65,7 +64,7 @@ public class ZebraServiceStructureProjectContributor implements BuildWriter, Pro
 
     @Override
     public int getOrder() {
-        return SERVICE_STRUCTURE_CONTRIBUTOR_ORDER;
+        return ContributorOrder.ZebraServiceStructureProjectContributor;
     }
 
     @Override

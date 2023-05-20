@@ -469,7 +469,7 @@ initializr:
         format: based-project
       action: /starter.zip
     - name: 分层架构
-      id: maven-project
+      id: zebra-project
       description: Generate a Zebra project archive.
       tags:
         build: maven

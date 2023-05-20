@@ -6,6 +6,7 @@ import io.spring.initializr.generator.buildsystem.maven.MavenBuildWriter;
 import io.spring.initializr.generator.io.IndentingWriter;
 import io.spring.initializr.generator.io.IndentingWriterFactory;
 import io.spring.initializr.generator.project.contributor.ProjectContributor;
+import io.spring.initializr.zebra.contributor.support.ContributorOrder;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -28,8 +29,18 @@ public class ZebraRootPomProjectContributor implements BuildWriter, ProjectContr
 
     @Override
     public void contribute(Path projectRoot) throws IOException {
-        Path pomFile = Files.createFile(projectRoot.resolve("pom.xml"));
+        // MavenBuildProjectContributor 生成了一次 pom.xml
+        Path pom = projectRoot.resolve("pom.xml");
+        if (Files.exists(pom)) {
+            Files.delete(pom);
+        }
+        Path pomFile = Files.createFile(pom);
         writeBuild(Files.newBufferedWriter(pomFile));
+    }
+
+    @Override
+    public int getOrder() {
+        return ContributorOrder.ZebraRootPomProjectContributor;
     }
 
     @Override

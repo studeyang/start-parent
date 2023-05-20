@@ -7,7 +7,7 @@ import io.spring.initializr.generator.project.contributor.SingleResourceProjectC
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static io.spring.initializr.zebra.contributor.support.ContributorSupport.DEFAULT_CODE_CONTRIBUTOR_ORDER;
+import static io.spring.initializr.zebra.contributor.support.ContributorOrder.DEFAULT_CODE_CONTRIBUTOR_ORDER;
 
 /**
  * @author <a href="https://github.com/studeyang">studeyang</a>
