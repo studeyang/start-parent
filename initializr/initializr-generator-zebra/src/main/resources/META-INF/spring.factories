@@ -1,3 +1,7 @@
 io.spring.initializr.generator.project.ProjectGenerationConfiguration=\
 io.spring.initializr.zebra.autoconfig.ZebraProjectGenerationConfiguration,\
 io.spring.initializr.zebra.autoconfig.ProjectContributorAutoConfiguration
+
+io.spring.initializr.generator.project.ProjectFormatFactory=\
+io.spring.initializr.generator.project.based.BasedProjectFormatFactory,\
+io.spring.initializr.generator.project.zebra.ZebraProjectFormatFactory
