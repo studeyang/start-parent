@@ -25,6 +25,7 @@
 	<modules>
 		<module>start-client</module>
 		<module>start-site</module>
+		<module>initializr-generator-zebra</module>
 	</modules>
 
 	<profiles>
@@ -50,7 +51,7 @@
 			<dependency>
 				<groupId>io.spring.initializr</groupId>
 				<artifactId>initializr-generator-zebra</artifactId>
-				<version>${spring-initializr.version}</version>
+				<version>${revision}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.spring.initializr</groupId>
