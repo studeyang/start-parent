@@ -50,6 +50,7 @@ import java.nio.file.Files;
  * Initializr website application.
  *
  * @author Stephane Nicoll
+ * @author <a href="https://github.com/studeyang">studeyang</a>
  */
 @EnableAutoConfiguration
 @SpringBootConfiguration
