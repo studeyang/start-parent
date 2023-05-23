@@ -1,6 +1,10 @@
 # 介绍
 
-本工程基于 https://github.com/spring-io/start.spring.io 开发的，增加了分层应用架构，整合了公司自己的组件库，并且新开发了「创建工程」功能。界面预览图：
+本工程基于 [start.spring.io](https://github.com/spring-io/start.spring.io) 开发，增加了分层应用架构，整合了公司自己的组件库，并且新开发了「创建工程」功能。
+
+Build Required：
+- Java: 17
+- Maven: 3.8.3
 
 ### 【主界面】
 
