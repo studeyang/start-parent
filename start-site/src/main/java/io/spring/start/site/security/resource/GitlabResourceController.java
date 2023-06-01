@@ -1,8 +1,6 @@
 package io.spring.start.site.security.resource;
 
 import io.spring.start.site.security.SecurityProperties;
-import io.spring.start.site.security.biz.CICDTriggerProcessor;
-import io.spring.start.site.security.biz.CreateDevopsProcessor;
 import io.spring.start.site.security.biz.CreateGitlabProjectProcessor;
 import io.spring.start.site.security.biz.ProcessorChain;
 import io.spring.start.site.security.dto.Branch;
@@ -37,10 +35,6 @@ public class GitlabResourceController {
     private RestTemplate restTemplate;
     @Autowired
     private CreateGitlabProjectProcessor createGitlabProjectProcessor;
-    @Autowired
-    private CreateDevopsProcessor createDevopsProcessor;
-    @Autowired
-    private CICDTriggerProcessor cicdTriggerProcessor;
     @Autowired
     private SecurityProperties securityProperties;
 

@@ -1,7 +1,6 @@
 package io.spring.start.site.security;
 
 import io.spring.initializr.web.project.*;
-import io.spring.start.site.security.biz.CICDTriggerProcessor;
 import io.spring.start.site.security.biz.CreateDevopsProcessor;
 import io.spring.start.site.security.biz.CreateGitlabProjectProcessor;
 import io.spring.start.site.security.resource.GitlabResourceController;
@@ -58,11 +57,6 @@ public class ResourceSecurityConfiguration {
     }
 
     @Bean
-    public JenkinsController jenkinsController(CICDTriggerProcessor cicdTriggerProcessor) {
-        return new JenkinsController(cicdTriggerProcessor);
-    }
-
-    @Bean
     @SessionScope
     public AuthorizeResultHolder authorizeResultHolder() {
         return new AuthorizeResultHolder();
@@ -92,11 +86,6 @@ public class ResourceSecurityConfiguration {
     public CreateDevopsProcessor createDevopsProcessor(
             RestTemplate restTemplate, SecurityProperties securityProperties) {
         return new CreateDevopsProcessor(restTemplate, securityProperties);
-    }
-
-    @Bean
-    public CICDTriggerProcessor cicdTriggerProcessor() {
-        return new CICDTriggerProcessor();
     }
 
 }
