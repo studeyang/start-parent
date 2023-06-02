@@ -58,7 +58,7 @@ initializr:
   env:
     # 这个url默认值是: https://spring.io/project_metadata/spring-boot
     # 会覆盖 bootVersion
-    springBootMetadataUrl:
+#    springBootMetadataUrl:
     maven:
       parent:
         group-id: com.yourcompany
@@ -484,23 +484,20 @@ initializr:
     - id: 1.8
       name: 8
       default: true
+    - id: 11
+      name: 11
+    - id: 17
+      name: 17
   languages:
     - name: Java
       id: java
       default: true
   bootVersions:
-    - name: 1.4.2
-      id: 1.4.2.RELEASE
-      default: true
     - name: 1.5.7
       id: 1.5.7.RELEASE
-      default: false
+      default: true
     - name: 2.0.4
       id: 2.0.4.RELEASE
-      default: false
-    - name: 2.7.1
-      id: 2.7.1.RELEASE
-      default: false
 
 ---
 
