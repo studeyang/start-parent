@@ -38,4 +38,4 @@ logs
 /start-client/analysis
 
 ### 脱敏 ###
-/start-site/src/main/resources/application-dev.yml
+/start-site/src/main/resources/casstime.yml

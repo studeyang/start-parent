@@ -2,6 +2,15 @@ logging:
   level:
     org.springframework.core.env: warn
     org.springframework.jndi: warn
+  file:
+    name: logs/start-site.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%5p) %t [%cyan(%-40.40logger{39}:%line)] - %m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %t [%-40.40logger{39}:%line] - %m%n"
+  logback:
+    rollingpolicy:
+      max-file-size: "120MB"
+      max-history: 30
 
 management:
   info:
@@ -56,8 +65,6 @@ initializr:
   # 最多可设 5 层
   package-name.value: com.yourcompany.example
   env:
-    # 这个url默认值是: https://spring.io/project_metadata/spring-boot
-    # 会覆盖 bootVersion
 #    springBootMetadataUrl:
     maven:
       parent:
@@ -123,6 +130,7 @@ initializr:
     platform:
       compatibility-range: "1.4.2.RELEASE"
       v1-format-compatibility-range: "[1.4.2.RELEASE,2.7.1.RELEASE]"
+      v2-format-compatibility-range: "[2.7.12,3.99.99]"
     repositories:
       spring-releases:
         name: Spring Releases
@@ -498,7 +506,6 @@ initializr:
       default: true
     - name: 2.0.4
       id: 2.0.4.RELEASE
-
 ---
 
 spring:

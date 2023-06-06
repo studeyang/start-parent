@@ -9,7 +9,7 @@ ADD target/start-site-exec.jar start-site-exec.jar
 RUN sed -i 's/dl-cdn.alpinelinux.org/repo.huaweicloud.com/g' /etc/apk/repositories && \
     apk add git=2.20.4-r0 && \
     git config --global user.email "start@yourcompany.com" && \
-    git config --global user.name "start.yourcompany.com" && \
+    git config --global user.name "start-parent" && \
     git config --list
 
 EXPOSE 8080
