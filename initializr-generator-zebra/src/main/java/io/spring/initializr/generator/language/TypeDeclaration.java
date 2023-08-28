@@ -18,8 +18,6 @@ package io.spring.initializr.generator.language;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,19 +25,24 @@ import java.util.List;
  * A type declared in a {@link CompilationUnit}.
  *
  * @author Andy Wilkinson
+ * @author <a href="https://github.com/studeyang">studeyang</a>
+ *
  */
 public class TypeDeclaration implements Annotatable {
 
-    private final List<Annotation> annotations = new ArrayList<>();
+    private final AnnotationContainer annotations = new AnnotationContainer();
+
+    private final List<String> implementClassNames = new LinkedList<>();
 
     private final String name;
 
     private String extendedClassName;
 
+    /**
+     * 泛型
+     */
     @Getter
     private String generics;
-
-    private List<String> implementClassNames = new LinkedList<>();
 
     public TypeDeclaration(String name) {
         this.name = name;
@@ -59,13 +62,8 @@ public class TypeDeclaration implements Annotatable {
     }
 
     @Override
-    public void annotate(Annotation annotation) {
-        this.annotations.add(annotation);
-    }
-
-    @Override
-    public List<Annotation> getAnnotations() {
-        return Collections.unmodifiableList(this.annotations);
+    public AnnotationContainer annotations() {
+        return this.annotations;
     }
 
     public String getName() {
