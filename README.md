@@ -52,4 +52,6 @@ docker run -d \
 
 # 联系作者
 
+如需进技术交流群，加我时请备注。
+
 ![image-20221127122036490](docs/contact.png)
