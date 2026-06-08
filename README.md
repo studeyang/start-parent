@@ -1,3 +1,8 @@
+> 相关博客：
+>
+> - [《基于start.spring.io，我实现了Java脚手架定制》](https://juejin.cn/post/7159834640948625444)
+> - [《spring initializr脚手架搭建详解》](https://juejin.cn/post/7170627657711747108)
+
 # 介绍
 
 本工程基于 [start.spring.io](https://github.com/spring-io/start.spring.io) 开发，增加了分层应用架构，整合了公司自己的组件库，并且新开发了「创建工程」功能。
